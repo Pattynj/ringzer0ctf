@@ -1,0 +1,21 @@
+Challenge: Some Martian Message
+
+Description:
+You're presented with a message that looks like gibberish:
+SYNTPrfneVfPbbyOhgAbgFrpher
+
+The challenge title is "Some Martian message", and we have asked to submit the flag based on that.
+
+If you don't know what kind of, you can check here  (https://www.dcode.fr/cipher-identifier)
+
+Analysis:
+After checking the cipher in the above website we got to know that it is a ROT13 cipher.
+The message appears to be encoded. The fact that it includes both upper- and lowercase letters, and that the text resembles real words but is slightly off, suggests a ROT13 cipher might be used.
+
+Solution:
+We used CyberChef to decode the ROT13 string:
+Input: SYNTPrfneVfPbbyOhgAbgFrpher
+After decoding with ROT13 we got the flag
+Output:
+FLAGCesarIsCoolButNotSecure
+
