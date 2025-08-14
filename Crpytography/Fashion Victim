@@ -1,0 +1,94 @@
+Fashion Victim
+
+Objective:
+Get the flag
+
+Solution:
+On the page we see a picture of a on old apple computer with the tag of The New Apple TV across the top, with snow playing on the screen
+The source for the page is pretty basic, just loading a background image and the gif of snow.
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>The new Apple TV</title>
+</head>
+<body>
+<style type="text/css">
+body { background-color: #5c3302; }
+h1 { color: white; }
+.tv { position: relative; margin: auto; margin-top: 20px; width: 471px; height: 616px; background-image: url(/images/mac.png); }
+.screen { width: 322px; height: 237px; position: absolute; left: 72px; top: 80px; }
+</style>
+<center><h1>The new Apple TV</h1></center>
+<div class="tv">
+<img src="/images/tv.gif" class="screen" />
+</div>
+</body>
+</html>
+
+No direct hints in the page source.
+I was pretty stuck here and had no idea what to do, so I googled around for a starting point and came across this thread on reddit
+
+https://www.reddit.com/r/HowToHack/comments/adspf1/ringzero_ctf_cryptography_fashion_victim/
+
+The comment from Pharisaeus got me going down the right track
+
+Basically he points out the fact that a gif is just a series of static images and its possible to extract them.
+
+So I downloaded the GIF and uploaded it to this website which split it out for me into individual frames
+
+https://ezgif.com/split
+
+After uploading and checking the gif image in overlay i can able see the some images, so i asked chatgpt to create a python script that checks the frames of gif and make overlay like possible combinations (frame1+frame2, frame1+frame3, frame2+frame3, etc.).
+
+The results of chatgpt;
+Alright — here’s the full Python script that:
+Extracts all frames from your GIF.
+Generates every pairwise overlay.
+Combines all overlays back into a new animated GIF so you can quickly scan for hidden content without manually opening hundreds of files.
+
+from PIL import Image, ImageSequence
+import os
+import itertools
+
+# Input GIF
+gif_path = "tv.gif"
+output_dir = "overlay_results_all"
+os.makedirs(output_dir, exist_ok=True)
+
+# Extract frames
+frames = []
+with Image.open(gif_path) as img:
+    for frame in ImageSequence.Iterator(img):
+        frames.append(frame.convert("RGBA"))
+
+overlay_frames = []
+
+# Generate overlays for all frame pairs
+for i, j in itertools.combinations(range(len(frames)), 2):
+    overlay = Image.blend(frames[i], frames[j], alpha=0.5)
+    overlay_frames.append(overlay)
+    output_path = os.path.join(output_dir, f"overlay_{i}_{j}.png")
+    overlay.save(output_path)
+    print(f"[+] Saved {output_path}")
+
+# Save all overlays as a single GIF
+gif_output_path = os.path.join(output_dir, "all_overlays.gif")
+overlay_frames[0].save(
+    gif_output_path,
+    save_all=True,
+    append_images=overlay_frames[1:],
+    duration=200,  # ms per frame
+    loop=0
+)
+
+print(f"\n[✓] Done! Overlay GIF saved at: {gif_output_path}")
+
+
+Now I just manually browsed the output directory looked at the resulting combined images to see if any of them was anything but snow.
+I found it in folder 17
+File frame_17 frame_25 I see this picture wit the flag information
+
+Flag-AcsW3fK9NxJMn2
+
+
