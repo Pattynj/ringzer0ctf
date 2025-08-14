@@ -1,0 +1,31 @@
+Challenge: You're drunk!
+
+
+Description:
+You're presented with a message that looks like gibberish:
+Ayowe awxewr nwaalfw die tiy rgw fklf ua xgixiklrw! Tiy lew qwkxinw.
+
+The challenge title is "You're drunk!", and we have asked to submit the flag based on that.
+
+If you don't know what kind of, you can check here  (https://www.dcode.fr/cipher-identifier)
+
+Analysis:
+From the initial observation, the message seems oddly close to readable English but with several incorrect characters. To confirm the cipher we used https://www.dcode.fr/cipher-identifier and determined that it likely involved a keyboard shift.
+
+Solution:
+We decoded the message using the tool:
+https://www.dcode.fr/keyboard-shift-cipher to decode the key board string:
+Input: Ayowe awxewr nwaalfw die tiy rgw fklf ua xgixiklrw! Tiy lew qwkxinw.
+
+After decoding we got some text with some text and specail character like this
+	Super secret mess;ge for you the gl;g is chocol;te@ You ;re welcome/
+
+The semicolon ; appears to be a mistyped a, due to keyboard proximity.
+The @ is likely meant to be a period or just part of the sentence.
+After fixing obvious typos:
+
+Super secret message for you the flag is chocolate. You are welcome.
+
+
+We got the flag that is 
+FLAG: chocolate
