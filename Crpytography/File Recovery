@@ -1,0 +1,14 @@
+After downloading the provided ZIP file, we extracted its contents.
+Inside, we found:
+flag.enc — the encrypted flag file.
+private.pem — an RSA private key in PEM format.
+
+These file types are commonly used in networking, when using asymmetric encryption to communicate with another party, with .enc containing the ciphertext and .pem the key to decrypt it.
+
+We can use the openssl
+In the command terminal type
+"openssl pkeyutl -decrypt -in flag.enc -out flag.txt -inkey private.pem "
+
+Check the flag.txt and we got our flag
+
+FLAG-vOAM5ZcReMNzJqOfxLauakHx
