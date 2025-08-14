@@ -1,0 +1,23 @@
+Challenge Description
+
+Martian message part 2
+I think that's the key "fselkladfklklakl"
+
+KDERE2UNX1W1H96GYQNUSQT1KPGB
+
+The ciphertext contains uppercase letters and digits, suggesting the alphabet is not standard A–Z.
+We also have a possible key string consisting of lowercase letters.
+Given this structure, possible ciphers include:
+
+Vigenère with an extended alphabet (A–Z + 0–9)
+
+Autokey cipher
+
+Other polyalphabetic substitutions
+
+with the help https://www.dcode.fr/vigenere-cipher tool 
+I tested the given key "fselkladfklklakl" in a Vigenère cipher decoder with an extended alphabet:
+and the ciphertext "KDERE2UNX1W1H96GYQNUSQT1KPGB".
+
+Using a custom alphabet Vigenère decoder, the output was:
+FLAGU2JNU1R1X96VOFNKHLB1GEWQ
